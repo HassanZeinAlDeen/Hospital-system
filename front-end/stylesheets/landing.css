@@ -33,6 +33,7 @@ button {
   height: 2rem;
   text-align: center;
   font-size: 1rem;
+  border-radius: 2rem;
 }
 
 .buttons {
@@ -49,13 +50,6 @@ input{
   border: none;
   margin-top: 0.7rem;
 }
-
-/* #building{
-  position: relative;
-  display: block;
-  max-width: 100%;
-  height: auto;
-} */
 
 .container {
   position: relative;
