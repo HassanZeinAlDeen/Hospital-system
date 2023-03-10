@@ -88,3 +88,11 @@ button {
 .title{
   font-size: 3rem;
 }
+
+
+.link {
+  color: #1C4D8C;
+  font-family: 'Roboto';
+  margin-top: 1rem;
+  margin-left: 2rem;
+}
