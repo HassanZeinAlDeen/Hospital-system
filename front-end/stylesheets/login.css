@@ -5,6 +5,11 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: 'Roboto';
+  background-color: #DFEDF2;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -17,7 +22,7 @@
   color: #1C4D8C;
 }
 
-#signup {
+#login {
   width: 5rem;
   height: 2rem;
   text-align: center;
@@ -35,6 +40,7 @@
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
+  margin-top: 2rem;
 }
 
 button {
@@ -68,4 +74,33 @@ a {
   font-family: 'Roboto';
   margin-top: 2rem;
   margin-left: 1rem;
+  background-color: #DFEDF2;
+  width: 100%;
 }
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #DFEDF2;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  height: 5rem;
+
+  text-align: center;
+  align-items: center;
+}
+
+#search {
+  height: 2rem;
+  width: 20rem;
+  text-align: center;
+  border: none;
+  margin-top: 0.5rem;
+}
+
+#logo {
+  height: 3.5rem;
+  text-align: center;
+}
+
+

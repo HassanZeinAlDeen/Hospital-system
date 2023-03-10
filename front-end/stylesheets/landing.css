@@ -43,7 +43,7 @@ button {
   font-family: 'Roboto';
 }
 
-input{
+#search {
   height: 2rem;
   width: 20rem;
   text-align: center;
@@ -55,7 +55,7 @@ input{
   position: relative;
 }
 
-.container img{
+.container img {
   display: block;
   max-width: 100%;
   height: auto;
@@ -71,10 +71,3 @@ input{
   background-color: rgba(0, 0, 0, 0.5);
   padding: 10px 20px;
 }
-
-
-
-
-
-
-
