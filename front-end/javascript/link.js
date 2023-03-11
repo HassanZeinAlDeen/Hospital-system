@@ -17,8 +17,14 @@ link_pages.getApi = async (api_url) => {
   link_pages.load_meds = async () => {
     const get_medication_url = link_pages.base_url + "displaymedications.php";
     const response = await link_pages.getApi(get_medication_url);
-    console.log(response.data);
     const displayMedButton = document.getElementById("display_medication");
+    const meds = response.data;
+
+    for(let i=0;i<meds.medications.length;i++){
+      var rows ="<tr><td>" + meds.medications[i].Id + "</td><td>" 
+      + meds.medications[i].Name + "</td><td>" + meds.medications[i].Cost + "</td></tr>";
+      document.getElementById('mtable').getElementsByTagName('tbody')[0].insertRow().innerHTML = rows;
+    }
     displayMedButton.disabled = true;
   }
 

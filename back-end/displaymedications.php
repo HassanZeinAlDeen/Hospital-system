@@ -2,7 +2,7 @@
 
 include('connection.php');
 
-$query = $mysql -> prepare('SELECT Id, Name from Medications');
+$query = $mysql -> prepare('SELECT Id, Name, Cost from Medications');
 $query->execute();
 $result = $query->get_result();
 
