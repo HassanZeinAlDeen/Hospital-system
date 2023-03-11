@@ -23,7 +23,7 @@
   <div class="container">
     <div class="leftbar">
       <button id="entrance">Entrance</button>
-      <button id="display_medication">Medications</button>
+      <button id="display_medication" onclick="link_pages.loadFor('meds')">Medications</button>
       <button id="display_services">Services</button>
       <button id="costs">Costs</button>
       <button id="profile">Edit Profile</button>
@@ -38,7 +38,9 @@
         </table>
     </div>
   </div>
-
+  <script src="javascript/axios.min.js"></script>
+  <script src="javascript/link.js"></script>
+  <!-- <script>link_pages.loadFor("meds")</script> -->
 </body>
 
 </html>
