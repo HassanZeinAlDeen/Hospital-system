@@ -10,21 +10,46 @@ link_pages.getApi = async (api_url) => {
   }
 }
 
-  link_pages.loadFor = (page) => {
-    eval("link_pages.load_" + page + "();");
+
+
+link_pages.postAPI = async (api_url, api_data, api_token = null) => {
+  try {
+    return await axios.post(
+      api_url,
+      api_data,
+      {
+        headers: {
+          'Authorization': "token " + api_token
+        }
+      }
+    );
+  } catch (error) {
+    console.log("Error from POST API");
   }
+}
 
-  link_pages.load_meds = async () => {
-    const get_medication_url = link_pages.base_url + "displaymedications.php";
-    const response = await link_pages.getApi(get_medication_url);
-    const displayMedButton = document.getElementById("display_medication");
-    const meds = response.data;
+link_pages.loadFor = (page) => {
+  eval("link_pages.load_" + page + "();");
+}
 
-    for(let i=0;i<meds.medications.length;i++){
-      var rows ="<tr><td>" + meds.medications[i].Id + "</td><td>" 
+link_pages.load_meds = async () => {
+  const get_medication_url = link_pages.base_url + "displaymedications.php";
+  const response = await link_pages.getApi(get_medication_url);
+  const displayMedButton = document.getElementById("display_medication");
+  const meds = response.data;
+
+
+  for (let i = 0; i < meds.medications.length; i++) {
+    let check = document.createElement('button');
+    check.type = 'button';
+    check.textContent = 'Choose';
+    var rows = "<tr><td>" + check.outerHTML + "</td><td>" + meds.medications[i].Id + "</td><td>"
       + meds.medications[i].Name + "</td><td>" + meds.medications[i].Cost + "</td></tr>";
-      document.getElementById('mtable').getElementsByTagName('tbody')[0].insertRow().innerHTML = rows;
-    }
-    displayMedButton.disabled = true;
+    document.getElementById('mtable').getElementsByTagName('tbody')[0].insertRow().innerHTML = rows;
   }
+  displayMedButton.disabled = true;
+}
+
+
+
 
