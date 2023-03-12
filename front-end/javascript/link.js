@@ -56,24 +56,47 @@ link_pages.load_signup = async () => {
   const uPassword = document.getElementById("userPassword");
   const uDob = document.getElementById("userDOB");
   const uType = document.getElementById("userType");
-  data.append("Name",uName.value);
-  data.append("Email",uEmail.value);
-  data.append("Password",uPassword.value);
-  data.append("Dob",uDob.value);
-  data.append("Usertype_id",uType.value);
+  data.append("Name", uName.value);
+  data.append("Email", uEmail.value);
+  data.append("Password", uPassword.value);
+  data.append("Dob", uDob.value);
+  data.append("Usertype_id", uType.value);
   const signup_url = link_pages.base_url + "signup.php";
   const response = await link_pages.postAPI(signup_url, data);
   const signup = response.data;
-  console.log(response);
-  if(signup.status == "failed"){
+  if (signup.status == "failed") {
     message.innerHTML = "email already exists";
     message.style.color = "red";
-  } else if(signup.status == "success"){
+  } else if (signup.status == "success") {
     message.innerHTML = "Registration successful";
     message.style.color = "green";
     window.location.href = "./login.html";
   }
-  console.log(signup);
+}
+
+link_pages.load_login = async () => {
+  let response_message = document.getElementById("message");
+  let uEmail = document.getElementById("userEmail").value;
+  let uPassword = document.getElementById("userPassword").value;
+  let uType = document.getElementById("userType").value;
+  let data = new FormData();
+  data.append('Email', uEmail);
+  data.append('Password', uPassword);
+  data.append('Usertype_id', uType);
+  const login_url = link_pages.base_url + "login.php";
+  const response = await link_pages.postAPI(login_url, data);
+  const login = response.data;
+  console.log(login);
+  console.log(login.response);
+  if (login.response == "user not found") {
+    response_message.innerHTML = "Email Not Found";
+    message.style.color = "red";
+  } else if (login.response == "logged in") {
+    window.location.href = "/index.html";
+  } else if (login.response == "Incorrect password") {
+    response_message.innerHTML = "Password is Incorrect";
+    message.style.color = "red";
+  }
 }
 
 
