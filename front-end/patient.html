@@ -42,6 +42,7 @@
           <th></th>
         </tr>
       </table>
+      <label id="medCost"></label>
     </div>
   </div>
   <script src="javascript/axios.min.js"></script>
@@ -61,20 +62,18 @@
       document.getElementById('mtable').innerHTML = "";
       if (localStorage.getItem("medications") != undefined && localStorage.getItem("medications") != "") {
         medications = JSON.parse(localStorage.getItem("medications"));
-        var totalMedication = 0 ;
-        for(var i=0;i<medications.length;i++){
+        var totalMedication = 0;
+        for (var i = 0; i < medications.length; i++) {
           totalMedication += parseInt(medications[i].Cost);
           var rows = '<tr><td>' + medications[i].Id + '</td><td>'
-          + medications[i].Name + "</td><td>" + medications[i].Cost + "$</td></tr>";
+            + medications[i].Name + "</td><td>" + medications[i].Cost + "$</td></tr>";
           document.getElementById('mtable').insertRow().innerHTML = rows;
-
-
         }
- 
+        let medCost = document.getElementById('medCost');
+        medCost.textContent = "Total cost of Medications is $" + totalMedication;
+        medCost.style.marginTop = "1rem";
       }
     }
-
-
 
     function addMedications(medicationStr) {
       var medication = JSON.parse(medicationStr);
@@ -88,6 +87,30 @@
 
       console.log(medication);
     }
+
+    function constructServiceTable() {
+      document.getElementById('mtable').innerHTML = "";
+      if (localStorage.getItem("services") != undefined && localStorage.getItem("services") != "") {
+        services = JSON.parse(localStorage.getItem("services"));
+        var totalservices = 0;
+        for (var i = 0; i < services.length; i++) {
+          totalservices += parseInt(services[i].Cost);
+          var rows = '<tr><td>' + servies[i].Id + '</td><td>'
+            + services[i].Name + "</td><td>" + services[i].Cost + "$</td></tr>";
+          document.getElementById('mtable').insertRow().innerHTML = rows;
+        }
+        let servCost = document.getElementById('servCost');
+        servCost.textContent = "Total cost of Services is $" + totalservices;
+      }
+    }
+
+
+
+
+
+
+
+    
   </script>
 </body>
 
