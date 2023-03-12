@@ -49,6 +49,7 @@ link_pages.load_meds = async () => {
 }
 
 link_pages.load_signup = async () => {
+  const message = document.getElementById("response_message");
   const data = new FormData();
   const uName = document.getElementById("userName");
   const uEmail = document.getElementById("userEmail");
@@ -63,6 +64,15 @@ link_pages.load_signup = async () => {
   const signup_url = link_pages.base_url + "signup.php";
   const response = await link_pages.postAPI(signup_url, data);
   const signup = response.data;
+  console.log(response);
+  if(signup.status == "failed"){
+    message.innerHTML = "email already exists";
+    message.style.color = "red";
+  } else if(signup.status == "success"){
+    message.innerHTML = "Registration successful";
+    message.style.color = "green";
+    window.location.href = "./login.html";
+  }
   console.log(signup);
 }
 
