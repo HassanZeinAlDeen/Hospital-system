@@ -41,16 +41,15 @@ link_pages.load_meds = async () => {
     let check = document.createElement('button');
     check.type = 'button';
     check.textContent = 'Choose';
-    check.onclick = function (){
-      addMedications(JSON.stringify( meds.medications[i]))
+    check.onclick = function () {
+      addMedications(JSON.stringify(meds.medications[i]))
     };
 
-    var rows = '<tr><td id="med'+i+'"></td><td>' + meds.medications[i].Id + '</td><td>'
+    var rows = '<tr><td id="med' + i + '"></td><td>' + meds.medications[i].Id + '</td><td>'
       + meds.medications[i].Name + "</td><td>" + meds.medications[i].Cost + "$</td></tr>";
     document.getElementById('mtable').insertRow().innerHTML = rows;
-    document.getElementById('med'+i).appendChild(check);
+    document.getElementById('med' + i).appendChild(check);
   }
-  // displayMedButton.disabled = true;
 }
 
 link_pages.load_signup = async () => {
@@ -97,27 +96,46 @@ link_pages.load_login = async () => {
     response_message.innerHTML = "Email Not Found";
     message.style.color = "red";
   } else if (login.response == "logged in") {
-     
+
     //save user in the local storage 
     localStorage.setItem("userName", login.Name);
 
-    if(login.Usertype_id == 1){//admin
+    if (login.Usertype_id == 1) {//admin
       window.location.href = "admin.html";
     }
-    if(login.Usertype_id == 2 ){//employee
+    if (login.Usertype_id == 2) {//employee
       window.location.href = "employee.html";
     }
-    if(login.Usertype_id == 3){//pattient
+    if (login.Usertype_id == 3) {//pattient
       window.location.href = "patient.html";
     }
-    
-   
-
-
 
   } else if (login.response == "Incorrect password") {
     response_message.innerHTML = "Password is Incorrect";
     message.style.color = "red";
+  }
+}
+
+
+link_pages.load_serv = async () => {
+  const get_services_url = link_pages.base_url + "displayservices.php";
+  const response = await link_pages.getApi(get_services_url);
+  const displayMedButton = document.getElementById("display_services");
+  const serv = response.data;
+
+  document.getElementById('mtable').innerHTML = "";
+  for (let i = 0; i < serv.services.length; i++) {
+    let check = document.createElement('button');
+    check.type = 'button';
+    check.textContent = 'Request';
+    check.onclick = function () {
+      addMedications(JSON.stringify(serv.services[i]))
+    };
+
+    var rows = '<tr><td id="serv' + i + '"></td><td>' + serv.services[i].Name + '</td><td>'
+      + serv.services[i].Description + "</td><td>" + serv.services[i].Cost + "$</td></tr>";
+    document.getElementById('mtable').insertRow().innerHTML = rows;
+    document.getElementById('serv' + i).appendChild(check);
   }
 }
 

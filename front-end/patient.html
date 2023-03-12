@@ -30,7 +30,7 @@
     <div class="leftbar">
       <button id="entrance">Entrance</button>
       <button id="display_medication" onclick="link_pages.loadFor('meds')">Medications</button>
-      <button id="display_services">Services</button>
+      <button id="display_services" onclick="link_pages.loadFor('serv')">Services</button>
       <button id="costs" onclick="constructCostTable()">Costs</button>
       <button id="profile">Edit Profile</button>
     </div>
@@ -65,13 +65,12 @@
         var totalMedication = 0;
         for (var i = 0; i < medications.length; i++) {
           totalMedication += parseInt(medications[i].Cost);
-          var rows = '<tr><td>' + medications[i].Id + '</td><td>'
+          var rows = '<tr><td>' + " " + '</td><td>'
             + medications[i].Name + "</td><td>" + medications[i].Cost + "$</td></tr>";
           document.getElementById('mtable').insertRow().innerHTML = rows;
         }
         let medCost = document.getElementById('medCost');
-        medCost.textContent = "Total cost of Medications is $" + totalMedication;
-        medCost.style.marginTop = "1rem";
+        medCost.textContent = "Total cost is $" + totalMedication;
       }
     }
 
@@ -95,7 +94,7 @@
         var totalservices = 0;
         for (var i = 0; i < services.length; i++) {
           totalservices += parseInt(services[i].Cost);
-          var rows = '<tr><td>' + servies[i].Id + '</td><td>'
+          var rows = '<tr><td>' + " " + '</td><td>'
             + services[i].Name + "</td><td>" + services[i].Cost + "$</td></tr>";
           document.getElementById('mtable').insertRow().innerHTML = rows;
         }
@@ -104,13 +103,6 @@
       }
     }
 
-
-
-
-
-
-
-    
   </script>
 </body>
 
