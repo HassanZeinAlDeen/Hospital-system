@@ -23,16 +23,21 @@
     </div>
     <div class="info">
       <p>Full Name</p>
-      <input id="Name" type="text" placeholder="Name">
+      <input id="userName" type="text" placeholder="Name">
       <p>Email</p>
-      <input id="Email" type="text" placeholder="Email">
+      <input id="userEmail" type="text" placeholder="Email">
       <p>Password</p>
-      <input id="Password" type="password" placeholder="Password">
+      <input id="userPassword" type="password" placeholder="Password">
       <p>Date of Birth</p>
-      <input id="DOB" type="date" placeholder="Date Of Birth D/M/Y">
+      <input id="userDOB" type="date" placeholder="Date Of Birth D/M/Y">
+      <p>User Type</p>
+      <input id="userType" type="number" placeholder="Type ID">
     </div>
-    <button id="signup">Signup</button>
+    <button id="signup" onclick="link_pages.load_signup()">Signup</button>
   </div>
+  <script src="javascript/axios.min.js"></script>
+  <script src="javascript/link.js"></script>
+  <!-- <script>link_pages.loadFor("meds")</script> -->
 </body>
 
 </html>

@@ -10,8 +10,6 @@ link_pages.getApi = async (api_url) => {
   }
 }
 
-
-
 link_pages.postAPI = async (api_url, api_data, api_token = null) => {
   try {
     return await axios.post(
@@ -49,6 +47,26 @@ link_pages.load_meds = async () => {
   }
   displayMedButton.disabled = true;
 }
+
+link_pages.load_signup = async () => {
+  const data = new FormData();
+  const uName = document.getElementById("userName");
+  const uEmail = document.getElementById("userEmail");
+  const uPassword = document.getElementById("userPassword");
+  const uDob = document.getElementById("userDOB");
+  const uType = document.getElementById("userType");
+  data.append("Name",uName.value);
+  data.append("Email",uEmail.value);
+  data.append("Password",uPassword.value);
+  data.append("Dob",uDob.value);
+  data.append("Usertype_id",uType.value);
+  const signup_url = link_pages.base_url + "signup.php";
+  const response = await link_pages.postAPI(signup_url, data);
+  const signup = response.data;
+  console.log(signup);
+}
+
+
 
 
 
