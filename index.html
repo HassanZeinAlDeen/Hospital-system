@@ -19,7 +19,7 @@
     <input id="search" type="text" placeholder="Search">
     <div class="buttons">
       <button id="contact">Contact Us</button>
-      <button id="login">login</button>
+      <button id="login" onclick="login()">login</button>
     </div>
   </div>
   <div class="container">
@@ -28,6 +28,11 @@
   </div>
   <script src="/front-end/javascript/axios.min.js"></script>
   <script src="/front-end/javascript/link.js"></script>
+  <script>
+    function login(){
+      window.location.href = "/front-end/login.html";
+    }
+  </script>
 </body>
 
 </html>

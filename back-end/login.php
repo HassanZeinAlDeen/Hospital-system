@@ -3,7 +3,7 @@ include("connection.php");
 
 $email = $_POST['Email'];
 $password = $_POST['Password'];
-$user_type = $_POST['Usertype_id'];
+// $user_type = $_POST['Usertype_id'];
 
 $query = $mysql->prepare('SELECT `Id`, `Name`, `Email`, `Password`, `Dob`, `Usertype_id` from users where Email=?');
 $query->bind_param('s',$email);
@@ -21,7 +21,7 @@ if ($num_rows == 0) {
       $response['response'] = "logged in";
       $response['Id'] = $id;
       $response['Name'] = $name;
-      $response['Email'] = $email;
+      $response['Email'] = $email; 
       $response['Dob'] = $dob;
       $response['Usertype_id'] = $user_type;
   } else {

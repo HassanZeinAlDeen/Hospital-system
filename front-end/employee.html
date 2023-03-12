@@ -10,6 +10,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto&display=swap">
   <title>Employee</title>
 </head>
+<script>
+  if(localStorage.getItem("userName") == ""){
+    window.location.href = "/index.html";
+  }
+</script>
 <body>
   <div class="link">
     <a href="/index.html">Back To Home Page</a>

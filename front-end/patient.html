@@ -12,20 +12,26 @@
 
   <title>Patient</title>
 </head>
+<script>
+  if (localStorage.getItem("userName") == "") {
+    window.location.href = "/index.html";
+  }
+</script>
 
 <body>
   <div class="link">
-    <a href="/index.html">Back To Home Page</a>
+    <a href="javascript:logout();">Logout</a>
   </div>
   <div class="navbar">
     <p class="title">Patient</p>
+    <label id="patientName"></label>
   </div>
   <div class="container">
     <div class="leftbar">
       <button id="entrance">Entrance</button>
       <button id="display_medication" onclick="link_pages.loadFor('meds')">Medications</button>
       <button id="display_services">Services</button>
-      <button id="costs">Costs</button>
+      <button id="costs" onclick="constructCostTable()">Costs</button>
       <button id="profile">Edit Profile</button>
     </div>
     <div id="content">
@@ -40,6 +46,49 @@
   </div>
   <script src="javascript/axios.min.js"></script>
   <script src="javascript/link.js"></script>
+
+  <script>
+
+    document.getElementById('patientName').innerHTML = "Welcome " + localStorage.getItem("userName").toUpperCase();
+
+    function logout() {
+      localStorage.setItem("userName", "");
+      localStorage.setItem("medications", "");
+      window.location.href = "/index.html";
+    }
+
+    function constructCostTable() {
+      document.getElementById('mtable').innerHTML = "";
+      if (localStorage.getItem("medications") != undefined && localStorage.getItem("medications") != "") {
+        medications = JSON.parse(localStorage.getItem("medications"));
+        var totalMedication = 0 ;
+        for(var i=0;i<medications.length;i++){
+          totalMedication += parseInt(medications[i].Cost);
+          var rows = '<tr><td>' + medications[i].Id + '</td><td>'
+          + medications[i].Name + "</td><td>" + medications[i].Cost + "$</td></tr>";
+          document.getElementById('mtable').insertRow().innerHTML = rows;
+
+
+        }
+ 
+      }
+    }
+
+
+
+    function addMedications(medicationStr) {
+      var medication = JSON.parse(medicationStr);
+
+      var medications = [];
+      if (localStorage.getItem("medications") != undefined && localStorage.getItem("medications") != "") {
+        medications = JSON.parse(localStorage.getItem("medications"));
+      }
+      medications.push(medication);
+      localStorage.setItem("medications", JSON.stringify(medications));
+
+      console.log(medication);
+    }
+  </script>
 </body>
 
 </html>

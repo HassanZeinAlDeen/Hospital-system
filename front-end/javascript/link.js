@@ -36,16 +36,21 @@ link_pages.load_meds = async () => {
   const displayMedButton = document.getElementById("display_medication");
   const meds = response.data;
 
-
+  document.getElementById('mtable').innerHTML = "";
   for (let i = 0; i < meds.medications.length; i++) {
     let check = document.createElement('button');
     check.type = 'button';
     check.textContent = 'Choose';
-    var rows = "<tr><td>" + check.outerHTML + "</td><td>" + meds.medications[i].Id + "</td><td>"
-      + meds.medications[i].Name + "</td><td>" + meds.medications[i].Cost + "</td></tr>";
-    document.getElementById('mtable').getElementsByTagName('tbody')[0].insertRow().innerHTML = rows;
+    check.onclick = function (){
+      addMedications(JSON.stringify( meds.medications[i]))
+    };
+
+    var rows = '<tr><td id="med'+i+'"></td><td>' + meds.medications[i].Id + '</td><td>'
+      + meds.medications[i].Name + "</td><td>" + meds.medications[i].Cost + "$</td></tr>";
+    document.getElementById('mtable').insertRow().innerHTML = rows;
+    document.getElementById('med'+i).appendChild(check);
   }
-  displayMedButton.disabled = true;
+  // displayMedButton.disabled = true;
 }
 
 link_pages.load_signup = async () => {
@@ -78,11 +83,11 @@ link_pages.load_login = async () => {
   let response_message = document.getElementById("message");
   let uEmail = document.getElementById("userEmail").value;
   let uPassword = document.getElementById("userPassword").value;
-  let uType = document.getElementById("userType").value;
+  // let uType = document.getElementById("userType").value;
   let data = new FormData();
   data.append('Email', uEmail);
   data.append('Password', uPassword);
-  data.append('Usertype_id', uType);
+  // data.append('Usertype_id', uType);
   const login_url = link_pages.base_url + "login.php";
   const response = await link_pages.postAPI(login_url, data);
   const login = response.data;
@@ -92,7 +97,24 @@ link_pages.load_login = async () => {
     response_message.innerHTML = "Email Not Found";
     message.style.color = "red";
   } else if (login.response == "logged in") {
-    window.location.href = "/index.html";
+     
+    //save user in the local storage 
+    localStorage.setItem("userName", login.Name);
+
+    if(login.Usertype_id == 1){//admin
+      window.location.href = "admin.html";
+    }
+    if(login.Usertype_id == 2 ){//employee
+      window.location.href = "employee.html";
+    }
+    if(login.Usertype_id == 3){//pattient
+      window.location.href = "patient.html";
+    }
+    
+   
+
+
+
   } else if (login.response == "Incorrect password") {
     response_message.innerHTML = "Password is Incorrect";
     message.style.color = "red";
