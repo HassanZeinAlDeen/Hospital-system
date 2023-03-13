@@ -28,7 +28,7 @@
   </div>
   <div class="container">
     <div class="leftbar">
-      <button id="entrance">Entrance</button>
+      <button id="entrance" onclick="link_pages.loadFor('rooms')">Entrance</button>
       <button id="display_medication" onclick="link_pages.loadFor('meds')">Medications</button>
       <button id="display_services" onclick="link_pages.loadFor('serv')">Services</button>
       <button id="costs" onclick="constructCostTable()">Costs</button>
@@ -76,32 +76,57 @@
 
     function addMedications(medicationStr) {
       var medication = JSON.parse(medicationStr);
-
       var medications = [];
       if (localStorage.getItem("medications") != undefined && localStorage.getItem("medications") != "") {
         medications = JSON.parse(localStorage.getItem("medications"));
       }
       medications.push(medication);
       localStorage.setItem("medications", JSON.stringify(medications));
-
       console.log(medication);
     }
 
-    function constructServiceTable() {
-      document.getElementById('mtable').innerHTML = "";
-      if (localStorage.getItem("services") != undefined && localStorage.getItem("services") != "") {
-        services = JSON.parse(localStorage.getItem("services"));
-        var totalservices = 0;
-        for (var i = 0; i < services.length; i++) {
-          totalservices += parseInt(services[i].Cost);
-          var rows = '<tr><td>' + " " + '</td><td>'
-            + services[i].Name + "</td><td>" + services[i].Cost + "$</td></tr>";
-          document.getElementById('mtable').insertRow().innerHTML = rows;
-        }
-        let servCost = document.getElementById('servCost');
-        servCost.textContent = "Total cost of Services is $" + totalservices;
-      }
-    }
+    // function constructServiceTable() {
+    //   document.getElementById('mtable').innerHTML = "";
+    //   if (localStorage.getItem("services") != undefined && localStorage.getItem("services") != "") {
+    //     services = JSON.parse(localStorage.getItem("services"));
+    //     var totalservices = 0;
+    //     for (var i = 0; i < services.length; i++) {
+    //       totalservices += parseInt(services[i].Cost);
+    //       var rows = '<tr><td>' + " " + '</td><td>'
+    //         + services[i].Name + "</td><td>" + services[i].Cost + "$</td></tr>";
+    //       document.getElementById('mtable').insertRow().innerHTML = rows;
+    //     }
+    //     let servCost = document.getElementById('servCost');
+    //     servCost.textContent = "Total cost of Services is $" + totalservices;
+    //   }
+    // }
+
+    // function assignRoom(roomsStr) {
+    //   var room = JSON.parse(roomsStr);
+    //   var rooms = [];
+    //   if (localStorage.getItem("rooms") != undefined && localStorage.getItem("rooms") != "") {
+    //     rooms = JSON.parse(localStorage.getItem("rooms"));
+    //   }
+    //   rooms.push(room);
+    //   localStorage.setItem("rooms", JSON.stringify(rooms));
+    //   console.log(room);
+    // }
+
+
+    // function constructroomTable() {
+    //   document.getElementById('mtable').innerHTML = "";
+    //   if (localStorage.getItem("rooms") != undefined && localStorage.getItem("rooms") != "") {
+    //     services = JSON.parse(localStorage.getItem("rooms"));
+    //     var totalservices = 0;
+    //     for (var i = 0; i < rooms.length; i++) {
+    //       // totalservices += parseInt(rooms[i].Cost);
+    //       var rows = '<tr><td>' + " " + '</td><td>'
+    //         + rooms.patients[i].Room_number + "</td><td>" + rooms.patients[i].Is_vip + "$</td></tr>";
+    //       document.getElementById('mtable').insertRow().innerHTML = rows;
+    //     }
+    //   }
+    // }
+
 
   </script>
 </body>

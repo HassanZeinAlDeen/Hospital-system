@@ -120,7 +120,6 @@ link_pages.load_login = async () => {
 link_pages.load_serv = async () => {
   const get_services_url = link_pages.base_url + "displayservices.php";
   const response = await link_pages.getApi(get_services_url);
-  const displayMedButton = document.getElementById("display_services");
   const serv = response.data;
 
   document.getElementById('mtable').innerHTML = "";
@@ -140,7 +139,40 @@ link_pages.load_serv = async () => {
 }
 
 
+link_pages.load_rooms = async () => {
+  const get_rooms_url = link_pages.base_url + "assignpatient.php";
+  const response = await link_pages.getApi(get_rooms_url);
+  const rooms = response.data;
+  console.log(rooms.patients[0].Number_beds);
+  document.getElementById('mtable').innerHTML = "";
 
+  for (let i = 0; i < rooms.patients.length; i++) {
+
+    if (rooms.patients[i].Number_beds == 1) {
+      let bed = document.createElement('button');
+      bed.type = 'button';
+      bed.textContent = 'Bed';
+      let rows = '<tr><td id="bed' + i + '"></td><td>' + "Room-" + rooms.patients[i].Room_number + '</td><td>'
+        + rooms.patients[i].Cost_day_usd + "$</td></tr>";
+      document.getElementById('mtable').insertRow().innerHTML = rows;
+      document.getElementById('bed' + i).appendChild(bed);
+    }
+
+    if (rooms.patients[i].Number_beds == 2) {
+      let bed1 = document.createElement('button');
+      bed1.type = 'button';
+      bed1.textContent = 'Bed 1';
+      let bed2 = document.createElement('button');
+      bed2.type = 'button';
+      bed2.textContent = 'Bed 2'
+      let rows = '<tr><td id="bed' + i + '"></td><td>' + "Room-" + rooms.patients[i].Room_number + '</td><td>'
+        + rooms.patients[i].Cost_day_usd + "$</td></tr>";
+      document.getElementById('mtable').insertRow().innerHTML = rows;
+      document.getElementById('bed' + i).appendChild(bed1);
+      document.getElementById('bed' + i).appendChild(bed2);
+    }
+  }
+}
 
 
 
