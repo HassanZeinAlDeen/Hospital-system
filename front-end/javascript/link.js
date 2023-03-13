@@ -143,7 +143,7 @@ link_pages.load_rooms = async () => {
   const get_rooms_url = link_pages.base_url + "assignpatient.php";
   const response = await link_pages.getApi(get_rooms_url);
   const rooms = response.data;
-  console.log(rooms.patients[0].Number_beds);
+  console.log(rooms);
   document.getElementById('mtable').innerHTML = "";
 
   for (let i = 0; i < rooms.patients.length; i++) {
